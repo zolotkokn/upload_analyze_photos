@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+venv/
+.env/
+.venv/
+Pipfile.lock
+
+# Docker
+docker-compose.override.yml
+.docker/
+*.log
+
+# Локальные данные
+photos/
+data/
+
+# Чувствительные данные
+.env
+secrets/
+
+# Инструменты разработки
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Логи и временные файлы
+*.log
+*.tmp
+.pytest_cache/

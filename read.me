@@ -1,0 +1,52 @@
+Структура проекта
+
+project/
+├── docker-compose.yml          # Основной файл для запуска всех сервисов
+├── .env                        # Файл с переменными окружения
+├── uploader-service/           # Сервис загрузки фото
+│   ├── Dockerfile              # Dockerfile для сервиса загрузки
+│   ├── requirements.txt        # Зависимости для сервиса загрузки
+│   └── uploader_service.py     # Код сервиса загрузки
+├── analyzer-service/           # Сервис анализа фото
+│   ├── Dockerfile              # Dockerfile для сервиса анализа
+│   ├── requirements.txt        # Зависимости для сервиса анализа
+│   └── analyzer_service.py     # Код сервиса анализа
+└── photos/                     # Локальная директория для хранения фото (MinIO)
+
+
+5. Команды для запуска проекта
+
+5.1. Сборка и запуск контейнеров
+    docker-compose up --build
+
+5.2. Остановка контейнеров
+    docker-compose down
+
+5.3. Проверка работы RabbitMQ
+    Откройте браузер и перейдите по адресу:
+    http://localhost:15672
+    Логин и пароль: admin/admin123.
+
+5.4. Проверка работы MinIO
+    Откройте браузер и перейдите по адресу:
+    http://localhost:9001
+    Логин и пароль: minioadmin/minioadmin
+
+2.3. Очистите RabbitMQ
+Если RabbitMQ был запущен ранее с другими учетными данными, очистите его состояние:
+
+Остановите контейнер RabbitMQ:
+    docker-compose down
+Удалите данные RabbitMQ:
+    rm -rf ./rabbitmq-data
+Запустите контейнер снова:
+    docker-compose up --build
+
+3. Удалить очередь вручную:
+Удалите очередь photo_analysis_queue через веб-интерфейс RabbitMQ или командную строку:
+    docker exec -it rabbitmq rabbitmqctl delete_queue photo_analysis_queue
+
+1. Перезапуск контейнера сервера загрузки для проверки повторной отправки пачки файлов
+    docker restart uploader
+
+
